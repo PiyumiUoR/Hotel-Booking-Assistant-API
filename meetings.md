@@ -1,8 +1,8 @@
 # Meetings notes
 
 ## Meeting 1.
-* **DATE:**
-* **ASSISTANTS:**
+* **DATE: 1.2.2024**
+* **ASSISTANTS: Iván Sánchez Milara**
 
 ### Minutes
 *Summary of what was discussed during the meeting*
