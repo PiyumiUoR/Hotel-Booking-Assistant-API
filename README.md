@@ -26,6 +26,7 @@ The application uses SQLite as the database. SQLAlchemy is the ORM (Object-Relat
 
 1. **Install SQLite:**
    - Follow the instructions on the [SQLite website](https://www.sqlite.org/download.html) to download and install SQLite for your operating system.
+   - during our test run we used SQLite version 3.41.2
 
 2. **Create a Virtual Environment:**
    - It's recommended to create a virtual environment for your project. Run the following commands:
