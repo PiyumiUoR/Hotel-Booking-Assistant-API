@@ -14,8 +14,8 @@ In the meeting, the current version of the API description was discussed in a so
 4. Provide links to the related API examples and classify them according to the instructions in *Section 4: Related work*.
 
 ## Meeting 2.
-* **DATE:**
-* **ASSISTANTS:**
+* **DATE: 21.2.2024**
+* **ASSISTANTS: Iván Sánchez Milara**
 
 ### Minutes
 *Summary of what was discussed during the meeting*
