@@ -1,0 +1,161 @@
+{
+    "hotels": [
+        {
+            "name": "Hotel1",
+            "country": "Finland",
+            "city": "Oulu",
+            "street": "Kirkkokatu 3",
+            "rooms": [
+                {
+                    "number": 101,
+                    "type": "single",
+                    "available": true,
+                    "price": 80,
+                    "bookings": [
+                        {
+                            "booking_ref": 1001,
+                            "check_in": [2024, 2, 20],
+                            "check_out": [2024, 2, 24],
+                            "payment": "Card"
+                        }
+                    ]
+                },
+                {
+                    "number": 201,
+                    "type": "double",
+                    "available": true,
+                    "price": 100,
+                    "bookings": []
+                },
+                {
+                    "number": 301,
+                    "type": "suite",
+                    "available": true,
+                    "price": 150,
+                    "bookings": [
+                        {
+                            "booking_ref": 1002,
+                            "check_in": [2024, 2, 23],
+                            "check_out": [2024, 2, 26],
+                            "payment": "Card"
+                        }
+                    ]
+                }
+            ],
+            "admins": [
+                {
+                    "username": "Juha",
+                    "password": "root"
+                }
+            ]
+        },
+        {
+            "name": "Hotel2",
+            "country": "Finland",
+            "city": "Oulu",
+            "street": "Kajaaninkatu 17",
+            "rooms": [
+                {
+                    "number": 101,
+                    "type": "single",
+                    "available": true,
+                    "price": 90,
+                    "bookings": [
+                        {
+                            "booking_ref": 1003,
+                            "check_in": [2024, 3, 5],
+                            "check_out": [2024, 3, 9],
+                            "payment": "Card"
+                        }
+                    ]
+                },
+                {
+                    "number": 201,
+                    "type": "double",
+                    "available": true,
+                    "price": 120,
+                    "bookings": []
+                },
+                {
+                    "number": 301,
+                    "type": "suite",
+                    "available": true,
+                    "price": 160,
+                    "bookings": []
+                }
+            ],
+            "admins": [
+                {
+                    "username": "Heikki",
+                    "password": "root"
+                }
+            ]
+        },
+        {
+            "name": "Hotel3",
+            "country": "Finland",
+            "city": "Oulu",
+            "street": "Hallituskatu 1",
+            "rooms": [
+                {
+                    "number": 101,
+                    "type": "single",
+                    "available": true,
+                    "price": 85,
+                    "bookings": []
+                },
+                {
+                    "number": 201,
+                    "type": "double",
+                    "available": true,
+                    "price": 115,
+                    "bookings": []
+                },
+                {
+                    "number": 301,
+                    "type": "suite",
+                    "available": true,
+                    "price": 150,
+                    "bookings": [
+                        {
+                            "booking_ref": 1004,
+                            "check_in": [2024, 3, 1],
+                            "check_out": [2024, 3, 4],
+                            "payment": "Card"
+                        }
+                    ]
+                }
+            ],
+            "admins": [
+                {
+                    "username": "Aino",
+                    "password": "root"
+                }
+            ]
+        }
+    ],
+
+    "customers": [
+        {
+            "name": "Matti Meikalainen", 
+            "address": "Matintie 1",
+            "phone": "NaN",
+            "mail": "matti.meikalainen@gmail.com",
+            "bookings": [1001]
+        },
+        {
+            "name": "Maija Meikalainen", 
+            "mail": "maija.meikalainen@gmail.com",
+            "address": "Maijantie 1",
+            "phone": "NaN",
+            "bookings": [1002, 1003]
+        },
+        {
+            "name": "Mikko Mikkonen", 
+            "mail": "mikko.mikkonen@gmail.com",
+            "address": "Mikontie 1",
+            "phone": "NaN",
+            "bookings": [1004]
+        }
+    ]
+}
