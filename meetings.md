@@ -18,7 +18,8 @@ In the meeting, the current version of the API description was discussed in a so
 * **ASSISTANTS: Iván Sánchez Milara**
 
 ### Minutes
-*Summary of what was discussed during the meeting*
+The discussion points in the meeting were mainly about the progress of the database design and implementation. Overall the content was ok. The README.md file did not include facts such as how to create and populate a database although the required files are attached to the repository. Since there are usernames and passwords are involved in the 'Admin' table, the API authentication should be considered during the DB implementation. The relationship between the 'Booking' to 'Room' should be changed since a single booking can have only one room. If a customer is to book multiple rooms, multiple bookings are to be made. There are many types of rooms and for validation of room types, JSON Schema can be used. The 
+
 
 ### Action points
 *List here the actions points discussed with assistants*
