@@ -49,5 +49,5 @@ More infomation about specific version of Flask and other technologies can be fo
 
 To populate the database with sample data:
 
-1. Ensure the database (data.json) is in the same directory as hotel_booking_assistant.db, orm.py and polulate.py.
+1. Ensure that data.json is in the same directory as hotel_booking_assistant.db, orm.py and polulate.py.
 2. Run the `populatedb.py` script.
