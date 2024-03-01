@@ -45,3 +45,9 @@ The application uses SQLite as the database. SQLAlchemy is the ORM (Object-Relat
      
 More infomation about specific version of Flask and other technologies can be found in requirements.txt file
 
+### Populate Database
+
+To populate the database with sample data:
+
+1. Ensure the database (data.json) is in the same directory as hotel_booking_assistant.db, orm.py and polulate.py.
+2. Run the `populatedb.py` script.
