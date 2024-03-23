@@ -71,33 +71,33 @@ Description: Tests retrieving customer information using the `/api/customers/{cu
 Expected Outcome: The API should return customer information for a valid request, a 403 error if the admin is unauthorized, or a 404 error if the customer does not exist.
 
 ### Test Case 4: Create Customer
-Description: Tests the /api/customers/ endpoint for creating a new customer profile.
+Description: Tests the `/api/customers/` endpoint for creating a new customer profile.
 Expected Outcome: The API should return a 201 status code if the customer is successfully created, a 409 error if the email is already in use, or an appropriate error for other issues.
 
 ### Test Case 5: Delete Customer
-Description: Tests the API's ability to delete a customer profile using the /api/customers/{customer_id}/ endpoint.
+Description: Tests the API's ability to delete a customer profile using the `/api/customers/{customer_id}/` endpoint.
 Expected Outcome: The API should return a 204 status code if the customer is successfully deleted, a 403 error if the requestor doesn't have permission, a 405 error if deletion is not permitted (the customer has bookings), or a 404 error if the customer does not exist.
 
 ### Test Case 6: Customer Information Update
-Description: Tests updating information for an existing customer via the /api/customers/{customer_id}/ endpoint.
+Description: Tests updating information for an existing customer via the `/api/customers/{customer_id}/` endpoint.
 Expected Outcome: The API should return a 204 status code if the update is successful, a 409 error if the email is in use, or a 404 error if the customer does not exist or other problems.
 
 ### Test Case 7: Room Availability Check
-Description: Tests checking room availability based on specific criteria via the /api/rooms/{country}/{city}/ endpoint.
+Description: Tests checking room availability based on specific criteria via the `/api/rooms/{country}/{city}/` endpoint.
 Expected Outcome: The API should return a list of available rooms with status code of 200, or a 409 error if no rooms are available.
 
 ### Test Case 8: Booking Information Retrieval
-Description: Tests retrieving information for a specific booking through the /api/bookings/{booking_ref}/ endpoint.
+Description: Tests retrieving information for a specific booking through the `/api/bookings/{booking_ref}/` endpoint.
 Expected Outcome: The API should return the booking information with the status code of 200, if the booking exists, a 403 error if the admin is unauthorized, or a 404 error if the booking does not exist.
 
 ### Test Case 9: Delete Booking
-Description: Tests the API's capability to delete a booking using the /api/bookings/{booking_ref}/ endpoint.
+Description: Tests the API's capability to delete a booking using the `/api/bookings/{booking_ref}/` endpoint.
 Expected Outcome: The API should return a 204 status code if the booking is successfully deleted, a 403 error if the admin is unauthorized, a 404 error if the booking does not exist, or an appropriate error for other issues.
 
 ### Test Case 10: Create Booking
-Description: Tests the /api/bookings/ endpoint for creating a new booking.
+Description: Tests the `/api/bookings/` endpoint for creating a new booking.
 Expected Outcome: The API should return a 201 status code if the booking is successfully created, a 409 error if no room of the request is/are available, otherwise it will return 404 status code.
 
 ### Test Case 11: Booking Update
-Description: Tests updating an existing booking's details via the /api/bookings/{booking_ref}/ endpoint with the right admin authorization.
+Description: Tests updating an existing booking's details via the `/api/bookings/{booking_ref}/` endpoint with the right admin authorization.
 Expected Outcome: The API should update the booking and return a 204 status code, a 409 error if no rooms meet the criteria, or a 404 error if the booking does not exist.
