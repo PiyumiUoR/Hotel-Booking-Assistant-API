@@ -1,7 +1,16 @@
-import json, os, datetime
-from orm import Hotel, Room, Booking, Customer, Admin, app, db, exc
+""" Populate the database and print results from DB queries """
+
+# IMPORTS
+import json
+import os
+import datetime
+from sqlalchemy import exc
+from orm import Hotel, Room, Booking, Customer, Admin, app, db
 
 def populate_db():
+
+    """ This function populates the database with proper entries """
+
     # work inside current app context
     with app.app_context():
 
@@ -9,14 +18,19 @@ def populate_db():
         db.create_all()
 
         # read json for populating the database
-        with open(os.getcwd() + "/data.json") as f:
+        with open(os.getcwd() + "/data.json", encoding="utf-8") as f:
             data = json.load(f)
 
         # add example customers to the database
         customers = []
         for customer in data["customers"]:
             # create customer entry
-            customer_entry = Customer(name=customer["name"], phone=customer["phone"], mail=customer["mail"], address=customer["address"])
+            customer_entry = Customer(
+                name=customer["name"],
+                phone=customer["phone"],
+                mail=customer["mail"],
+                address=customer["address"]
+                )
 
             # add customer entry to list
             customers.append(customer_entry)
@@ -29,7 +43,12 @@ def populate_db():
         for hotel in data["hotels"]:
 
             # append new hotel object to list
-            hotel_entry = Hotel(name=hotel["name"], country=hotel["country"], city=hotel["city"], street=hotel["street"])
+            hotel_entry = Hotel(
+                name=hotel["name"],
+                country=hotel["country"],
+                city=hotel["city"],
+                street=hotel["street"]
+                )
 
             # add hotel entry to list
             hotels.append(hotel_entry)
@@ -38,16 +57,18 @@ def populate_db():
             for room in hotel["rooms"]:
 
                 # create room entry
-                room_entry = Room(number=room["number"], type=room["type"], available=room["available"], price=room["price"], hotel=hotel_entry)
+                room_entry = Room(
+                    number=room["number"],
+                    type=room["type"],
+                    price=room["price"],
+                    hotel=hotel_entry
+                    )
 
                 # add room entry to list
                 rooms.append(room_entry)
 
                 # get bookings for each room
                 for booking in room["bookings"]:
-
-                    # update availability
-                    room_entry.available = False
 
                     # get booking ref
                     booking_ref = booking["booking_ref"]
@@ -61,45 +82,64 @@ def populate_db():
                     # find the corresponding customer entry
                     try:
                         # find customer
-                        customer = customers[[idx for idx, customer in enumerate(data["customers"]) if booking_ref in customer["bookings"]].pop()]
+                        customer = customers[
+                            [idx for idx, customer in enumerate(data["customers"])
+                             if booking_ref in customer["bookings"]].pop()]
 
                         # create new booking entry for customer
-                        bookings.append(Booking(booking_ref=booking_ref, check_in=check_in, check_out=check_out, payment=booking["payment"], room=room_entry, customer=customer))
+                        bookings.append(
+                            Booking(
+                                booking_ref=booking_ref, check_in=check_in,
+                                check_out=check_out, payment=booking["payment"],
+                                room=room_entry, customer=customer)
+                            )
 
                     except IndexError:
-                        print("No customer information available for booking ref: {}. Booking is not added!".format(booking_ref))
+                        print(f"""No customer found for booking ref: {booking_ref}.
+                            Booking is not added!""")
 
             # add admin entry to hotel
             for admin in hotel["admins"]:
-                admins.append(Admin(username=admin["username"], password=admin["password"], hotel=hotel_entry))
-        
+
+                # create and add admin entry to list
+                admins.append(
+                    Admin(username=admin["username"],
+                        password=admin["password"],
+                        hotel=hotel_entry)
+                    )
+
         # add all to database
         try:
             db.session.add_all(bookings)
+            db.session.add_all(admins)
             db.session.commit()
         except exc.IntegrityError:
-            print("Hotel/Room/Admin entry exists in the DB or the data entered is incorrect. Remove the DB and try again!")
-    return
+            print("\nEntries exist already or the data is incorrect. Remove the DB and try again!")
 
 def print_db():
+
+    """ This function prints query results from the database """
 
     with app.app_context():
 
         # query hotels and rooms from the database
         for hotel in Hotel.query.all():
-            print("\n{} has the following rooms with prices:".format(hotel.name))
+            print(f"\n{hotel.name} has the following rooms with prices:")
             for room in hotel.rooms:
-                print("Room type: {}, Price: {} eur".format(room.type, room.price))
+                print(f"Room type: {room.type}, Price: {room.price} eur")
 
         # query all bookings from the database
         print("\n")
         for booking in Booking.query.all():
-            print("{} has booked room No. {} in {} from {} to {}".format(booking.customer.name, booking.room.number, booking.room.hotel.name, booking.check_in, booking.check_out))
-        
+            print(f"""{booking.customer.name} has booked
+                  room No. {booking.room.number} in {booking.room.hotel.name} from
+                  {booking.check_in} to {booking.check_out}"""
+                )
+
         # query all administrators from the database
         print("\n")
         for admin in Admin.query.all():
-            print("{} is an administrator for {}".format(admin.username, admin.hotel.name))
+            print(f"{admin.username} is an administrator for {admin.hotel.name}")
 
 if __name__ == "__main__":
 

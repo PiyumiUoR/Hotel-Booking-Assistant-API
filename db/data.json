@@ -9,42 +9,39 @@
                 {
                     "number": 101,
                     "type": "single",
-                    "available": true,
                     "price": 80,
                     "bookings": [
                         {
                             "booking_ref": 1001,
                             "check_in": [2024, 2, 20],
                             "check_out": [2024, 2, 24],
-                            "payment": "Card"
+                            "payment": "debit"
                         }
                     ]
                 },
                 {
                     "number": 201,
                     "type": "double",
-                    "available": true,
                     "price": 100,
                     "bookings": []
                 },
                 {
                     "number": 301,
                     "type": "suite",
-                    "available": true,
                     "price": 150,
                     "bookings": [
                         {
                             "booking_ref": 1002,
                             "check_in": [2024, 2, 23],
                             "check_out": [2024, 2, 26],
-                            "payment": "Card"
+                            "payment": "credit"
                         }
                     ]
                 }
             ],
             "admins": [
                 {
-                    "username": "Juha",
+                    "username": "juha",
                     "password": "root"
                 }
             ]
@@ -58,35 +55,32 @@
                 {
                     "number": 101,
                     "type": "single",
-                    "available": true,
                     "price": 90,
                     "bookings": [
                         {
                             "booking_ref": 1003,
                             "check_in": [2024, 3, 5],
                             "check_out": [2024, 3, 9],
-                            "payment": "Card"
+                            "payment": "cash"
                         }
                     ]
                 },
                 {
                     "number": 201,
                     "type": "double",
-                    "available": true,
                     "price": 120,
                     "bookings": []
                 },
                 {
                     "number": 301,
                     "type": "suite",
-                    "available": true,
                     "price": 160,
                     "bookings": []
                 }
             ],
             "admins": [
                 {
-                    "username": "Heikki",
+                    "username": "heikki",
                     "password": "root"
                 }
             ]
@@ -100,35 +94,32 @@
                 {
                     "number": 101,
                     "type": "single",
-                    "available": true,
                     "price": 85,
                     "bookings": []
                 },
                 {
                     "number": 201,
                     "type": "double",
-                    "available": true,
                     "price": 115,
                     "bookings": []
                 },
                 {
                     "number": 301,
                     "type": "suite",
-                    "available": true,
                     "price": 150,
                     "bookings": [
                         {
                             "booking_ref": 1004,
                             "check_in": [2024, 3, 1],
                             "check_out": [2024, 3, 4],
-                            "payment": "Card"
+                            "payment": "credit"
                         }
                     ]
                 }
             ],
             "admins": [
                 {
-                    "username": "Aino",
+                    "username": "aino",
                     "password": "root"
                 }
             ]
