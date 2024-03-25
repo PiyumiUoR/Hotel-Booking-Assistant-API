@@ -13,9 +13,9 @@ def test_home_route():
 def api_credentials():
     ADMIN_USERNAME = "heikki"
     ADMIN_PASSWORD = "root"
-    api_key = generate_api_key(ADMIN_USERNAME, ADMIN_PASSWORD)  # Renamed function
+    api_key = generate_api_key(ADMIN_USERNAME, ADMIN_PASSWORD)  
     yield api_key, ADMIN_USERNAME
-    delete_api_key(api_key, ADMIN_USERNAME)  # Renamed function
+    delete_api_key(api_key, ADMIN_USERNAME) 
 
 # Test Case: 1
 def generate_api_key(username, password):
@@ -74,9 +74,7 @@ def delete_api_key(api_key, admin_username):
 # Test Case: 3
 @pytest.mark.parametrize("customer_id", [1, 2, 100])
 def test_get_customer_information(customer_id, api_credentials):
-    api_key, admin_username = api_credentials  # Unpack the credentials provided by the fixture
-    # customer_id = 1  # Assuming you have a customer with ID 1
-    
+    api_key, admin_username = api_credentials
     print("TEST: test_get_customer_information")  
 
     url = f"{BASE_URL}api/customers/{customer_id}/"
@@ -371,7 +369,7 @@ def test_create_booking(api_credentials):
         print("New booking created successfully.")
         booking_location = response.headers.get("Location")
         print(f"Booking Location: {booking_location}")
-        return booking_location  # Return the booking location if you need to use it for further actions
+        return booking_location
     elif response.status_code == 409:
         print("Failure in POST: No room of the requested type is available.")
     else:
