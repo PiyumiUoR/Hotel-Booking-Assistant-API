@@ -26,14 +26,18 @@ The discussion points in the meeting were mainly about the progress of the datab
 3. The 'booking_ref' attribute is to be used as the primary key of the 'Booking' table. 
 
 ## Meeting 3.
-* **DATE:**
-* **ASSISTANTS:**
+* **DATE: 25.3.2024**
+* **ASSISTANTS: Iván Sánchez Milara**
 
 ### Minutes
-*Summary of what was discussed during the meeting*
+The meeting was held at 13:00 at Mr.Iván's office. The purpose of the meeting was to discuss the progress in the API implementation. The resource table and the addressability feature were OK. Then we discussed how the uniform interface feature can be explained more with examples. The file structure can be improved more with dividing into separate files. The code quality was above 9/10 in all of the files. The instruction was not added on how to run the test. The testing and implementation is to check in the next meeting. 
 
 ### Action points
-*List here the actions points discussed with assistants*
+1. The uniform interface section is required to be updated with the examples for each method.
+2. The code should be arranged according to the project structure.
+3. The instructions should be there on how the API testing is done.
+4. The test coverage is needed to be improved.
+5. The implementation is yet to present to the teacher. 
 
 
 
