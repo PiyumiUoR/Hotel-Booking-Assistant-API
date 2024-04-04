@@ -30,15 +30,14 @@ The discussion points in the meeting were mainly about the progress of the datab
 * **ASSISTANTS: Iván Sánchez Milara**
 
 ### Minutes
-The meeting was held at 13:00 at Mr.Iván's office. The purpose of the meeting was to discuss the progress in the API implementation. The resource table and the addressability feature were OK. Then we discussed how the uniform interface feature can be explained more with examples. The file structure can be improved more by separating it into separate files. The code quality was above 9/10 in all of the files. The instruction was not added on how to run the test. The testing and implementation are to be checked in the next meeting. 
+The purpose of the meeting was to assess the progress of the group regarding the API implementation. The resources and the required features of a REST API were considered appropriate with the exception of the uniform interface that lacked examples of the different request types. The file structure can be improved more by separating it into separate files. The Pylint score describing the quality of the code was excellent. Instructions on how to run tests for the API were not added in README. The schema validation, converters, and authentication were implemented appropriately as additional features. The testing and implementation demonstration will be checked in the next meeting.
 
 ### Action points
-1. The uniform interface section is required to be updated with the examples for each method.
-2. The code should be arranged according to the project structure.
-3. The instructions should be there on how the API testing is done.
-4. The test coverage needs to be improved.
-5. The implementation is yet to be presented to the teacher. 
-
+1. The uniform interface section needs to be updated with examples for each method.
+2. The code may be arranged according to the project structure for improvement. 
+3. The instructions on testing the API need to be provided in README.
+4. The test coverage needs to be improved, particularly for the main application.
+5. The implementation and corresponding test coverage will be demonstrated in the next meeting.
 
 ## Meeting 4.
 * **DATE:**
