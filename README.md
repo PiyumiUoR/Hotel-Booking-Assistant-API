@@ -56,7 +56,7 @@ To populate the database with sample data:
 # Testing
 
 ## Preparing testing environment
-If you already have installed Dependencies and ran the `populate.py` skip step 1 & 2 and continue from step 3
+If you already have installed Dependencies skip step 1 and continue from step 2
 
 1. **Install Dependencies:**
    - Install the required dependencies using:
