@@ -49,11 +49,58 @@ More infomation about specific version of Flask and other technologies can be fo
 
 To populate the database with sample data:
 
-1. Ensure that `data.json` is in the same directory as `hotel_booking_assistant.db`, `orm.py` & `populate.py`.
+1. Ensure that `data.json` is in the same directory as `app.py`, `keyFunc.py`, orm.py`, `populate.py` & `test_app.py`.
 2. Run the `populate.py` script.
 
 
+# Testing
+
+## Preparing testing environment
+If you already have installed Dependencies and ran the `populate.py` skip step 1 & 2 and continue from step 3
+
+1. **Install Dependencies:**
+   - Install the required dependencies using:
+     ```bash
+     pip install -r requirements.txt
+     ```
+2. **Populate Database**
+i. Ensure that `data.json` is in the same directory as `app.py`, `keyFunc.py`, orm.py`, `populate.py` & `test_app.py`.
+ii. Run the `populate.py` script.
+
+3. **Run Local Development Server for Flask Application**
+    - run `flask run` in your console / terminal. It will start a local development server
+
+4. **Start Testing**
+    - run `test_app.py` file with pytest:
+    ```
+    pytest --cov .
+    ```
+5. **Detailed Test Report**
+    - To get a detailed test report run:
+    ```
+    coverage html
+    ```
+    The coverage html command is part of the Coverage.py tool, which is used for measuring code coverage of Python programs.
+    This command specifically generates an HTML report that visually represents the code coverage of your tests.
+    
+## Test Coverage Report
+On April 9, 2024 our comprehensive API testing achieved an impressice 94% overall code coverage, this ensures a high level of code quality and reliability for this Hotel Booking Assistent API.
+
+### Test Coverage Report
+Image Link: 
+
+### Highlights:
+Our core application logic in app.py and utility constants in static/constants.py have achieved 100% coverage, ensuring that our foundational code is thoroughly tested.
+The comprehensive tests in test_app.py also got a perfect coverage, highlighting the effectiveness of our testing strategy.
+
+### Areas for Improvement:
+The majority of our resource modules exhibit good coverage, yet there is space for development in resources/customeritem.py and resources/bookingcollection.py.
+
+
+ 
+
 # RESTful API Functional Testing
+
 
 ## Test Cases
 
