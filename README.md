@@ -87,7 +87,7 @@ ii. Run the `populate.py` script.
 On April 9, 2024 our comprehensive API testing achieved an impressice 94% overall code coverage, this ensures a high level of code quality and reliability for this Hotel Booking Assistent API.
 
 ### Test Coverage Report
-Image Link: 
+Here is the [Test Coverage Report](https://github.com/RafiqulT1/PWP/blob/main/images/Coverage%20report.png).
 
 ### Highlights:
 Our core application logic in app.py and utility constants in static/constants.py have achieved 100% coverage, ensuring that our foundational code is thoroughly tested.
