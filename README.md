@@ -65,9 +65,8 @@ If you already have installed Dependencies and ran the `populate.py` skip step 1
      ```
 2. **Populate Database**
 To populate the database with sample data:
-
-a. Ensure that `data.json` is in the same directory as `app.py`, `keyFunc.py`, `orm.py`, `populate.py` and `test_app.py`.
-b. Run the `populate.py` script.
+- Ensure that `data.json` is in the same directory as `app.py`, `keyFunc.py`, `orm.py`, `populate.py` and `test_app.py`.
+- Run the `populate.py` script.
 
 3. **Run Local Development Server for Flask Application**
     - run `flask run` in your console / terminal. It will start a local development server
