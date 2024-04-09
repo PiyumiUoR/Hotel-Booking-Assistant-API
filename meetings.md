@@ -40,30 +40,14 @@ The purpose of the meeting was to assess the progress of the group regarding the
 5. The implementation and corresponding test coverage will be demonstrated in the next meeting.
 
 ## Meeting 4.
-* **DATE:**
-* **ASSISTANTS:**
+* **DATE: 10.4.2024**
+* **ASSISTANTS: Iván Sánchez Milara**
 
 ### Minutes
 *Summary of what was discussed during the meeting*
 
 ### Action points
 *List here the actions points discussed with assistants*
-
-
-
-
-## Midterm meeting
-* **DATE:**
-* **ASSISTANTS:**
-
-### Minutes
-*Summary of what was discussed during the meeting*
-
-### Action points
-*List here the actions points discussed with assistants*
-
-
-
 
 ## Final meeting
 * **DATE:**
