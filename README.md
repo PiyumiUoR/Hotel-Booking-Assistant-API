@@ -49,7 +49,7 @@ More infomation about specific version of Flask and other technologies can be fo
 
 To populate the database with sample data:
 
-1. Ensure that `data.json` is in the same directory as `app.py`, `keyFunc.py`, orm.py`, `populate.py` & `test_app.py`.
+1. Ensure that `data.json` is in the same directory as `app.py`, `keyFunc.py`, `orm.py`, `populate.py` & `test_app.py`.
 2. Run the `populate.py` script.
 
 
