@@ -80,10 +80,10 @@ If you already have installed Dependencies skip step 1 and continue from step 2
     The coverage html command is part of the Coverage.py tool, which is used for measuring code coverage of Python programs.
     This command specifically generates an HTML report that visually represents the code coverage of your tests.
     
-## About Test Coverage Report
+## Test Coverage Report
 On April 9, 2024 our comprehensive API testing achieved an impressice 94% overall code coverage, this ensures a high level of code quality and reliability for this Hotel Booking Assistent API.
 
-### Test Coverage Report:
+### About Test Coverage Report:
 ![Test Coverage Report](https://github.com/RafiqulT1/PWP/blob/main/images/Coverage%20report.png)
 
 ### Highlights:
