@@ -64,8 +64,9 @@ If you already have installed Dependencies and ran the `populate.py` skip step 1
      pip install -r requirements.txt
      ```
 2. **Populate Database**
-   
-1. Ensure that `data.json` is in the same directory as `app.py`, `keyFunc.py`, orm.py`, `populate.py` & `test_app.py`.
+To populate the database with sample data:
+
+1. Ensure that `data.json` is in the same directory as `app.py`, `keyFunc.py`, `orm.py`, `populate.py` and `test_app.py`.
 2. Run the `populate.py` script.
 
 3. **Run Local Development Server for Flask Application**
