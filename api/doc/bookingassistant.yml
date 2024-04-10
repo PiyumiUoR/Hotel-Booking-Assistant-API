@@ -1,0 +1,397 @@
+---
+openapi: 3.0.3
+info: 
+  title: Hotel Booking Assistant API
+  version: 1.0.0
+  description: |
+    This API allows users to reserve hotel rooms chosing according to the country, city, check-in and check-out dates. 
+  contact: 
+    name: Julius, Rafikul, Piyumi
+servers: 
+  - url: /api/
+components: 
+  parameters: 
+    booking:
+      description: Booking reference of the selected booking.
+      in: path
+      name: Booking reference
+      required: true
+      schema: 
+        type: integer
+    customer:
+      description: Customer ID of the selected customer.
+      in: path
+      name: Customer ID
+      required: true
+      schema:
+        type: integer
+    Hotels-Api-Key:
+      description: The known API key of the admin. 
+      in: header
+      name: Hotels-Api-Key
+      required: true
+      schema: 
+        type: string
+    Admin-User-Name:
+      description: The admin username. 
+      in: header
+      name: Admin-User-Name
+      required: true
+      schema: 
+        type: string
+  schemas: 
+    Booking: 
+      properties: 
+        customer_id: 
+          type: integer
+        hotel: 
+          type: string
+        room_type: 
+          type: string
+          enum: 
+          - single
+          - double
+          - suite
+        payment: 
+          type: string
+          enum:
+          - debit
+          - credit
+          - cash
+        check_in:
+          type: string
+          format: date
+        check_out:
+          type: string
+          format: date
+    Customer: 
+      properties:  
+        name:
+          type: string
+        phone: 
+          type: string
+        mail: 
+          type: string
+          format: email
+        address: 
+          type: string
+    ApiKey:
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+paths:
+  /customers/:
+    parameters:
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    post:
+      description: Adds a new cutomers to the customer database.
+      requestBody: 
+        description: JSON document with new customer data.
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+            example: 
+              name: Matti Meikalainen 
+              address: Matintie 1
+              phone: 0414253982
+              mail: matti.meikalainen@gmail.com
+      responses:
+        '200':
+          description: Successfully creation of the new customer.
+          content:
+            application/json:
+              example: 
+                id: 3
+                name: Matti Meikalainen 
+                phone: NaN
+                mail: matti.meikalainen@gmail.com
+                address: Matintie 1
+        '400':
+          description: The request body was not valid. 
+        '409':
+          description: Failure in POST. E-mail already in use.
+        '415':
+          description: Wrong media type was used.
+
+  /customers/{customer}/:
+    parameters: 
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    - $ref: '#/components/parameters/customer'
+    get: 
+      description: Gets the details of the customer.
+      responses:
+        '200':
+          description: Returns details of the customer. 
+          content:
+            application/json:
+              example: 
+                id: 3
+                name: Matti Meikalainen 
+                phone: NaN
+                mail: matti.meikalainen@gmail.com
+                address: Matintie 1
+        '404':
+          description: The customer was not found
+    delete:
+      description: Delete the selected customer.
+      responses: 
+        '200':
+         description: The customer was successfully deleted
+        '405':
+         description: DELETE not permitted (Customer has bookings)
+    put:
+      description: Modifies an existing customer. 
+      requestBody: 
+        description: JSON document with modified customer data.
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+            example:
+              name: Matti Meikalainen 
+              phone: NaN
+              mail: matti.meikalainen@gmail.com
+              address: Matintie 1
+      responses: 
+        '200':
+          description: The customer's attributes were updated successfully.
+          content:
+            application/json:
+              example: 
+                id: 3
+                name: Matti Meikalainen 
+                phone: NaN
+                mail: matti.meikalainen@gmail.com
+                address: Matintie 1
+        '400':
+          description: The request body was not valid.
+        '409':
+          description: Failure in PUT. E-mail already in use
+        '415':
+          description: Unsupported media type
+
+  /bookings/:
+    parameters:
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    post:
+      description: Adds a new booking.
+      requestBody:
+        description: JSON document with new booking data. 
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+            example:
+              customer_id: 3
+              hotel: Hotel3
+              room_type: suite
+              check_in: "2024-03-01"
+              check_out: "2024-03-04"
+              payment: credit
+      responses:
+        '200':
+          description: Successfully creation of the new booking.
+          content:
+            application/json:
+              example: 
+                booking_ref: 1006
+                room_id: 7
+                customer_id: 3
+                check_in: "2024-04-10"
+                check_out: "2024-04-15"
+                payment: credit
+        '400':
+          description: Incorrect check-in/check-out dates.
+        '409':
+          description: Failure in POST. No room of the requested type is available.
+        '415':
+          description: Wrong media type was used.
+        '404': 
+          description: The hotel was not found. 
+
+  /bookings/{booking}/:
+    parameters: 
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    - $ref: '#/components/parameters/booking'
+    get:
+      description: Get the booking information of a single booking
+      responses: 
+        '200':
+          description: Returns the details of the requested booking successfully. 
+          content:
+            application/json:
+              example:
+                booking_ref: 1005
+                room_id: 7
+                room_number: 301
+                hotel_name: Hotel3
+                customer_id: 3
+                customer_name: Mikko Mikkonen
+                check-in: 2024-02-20
+                check-out: 2024-02-24
+                payment: credit
+                
+        '404':
+          description: The booking not found.
+    delete:
+      description: Deletes the selected booking.
+      responses:
+        '204':
+          description: The booking is successfuly deleted. 
+        '404':
+          description: Not found. The requested booking does not exist.
+    put:
+      description: Modifies the details of the specified booking.
+      requestBody:
+        description: JSON document with modified booking data. 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+            example:
+              customer_id: 3
+              hotel: Hotel3
+              room_type: suite
+              check_in: "2024-03-01"
+              check_out: "2024-04-04"
+              payment: credit
+      responses:
+        '200':
+          description: Successfully modified the new customer.
+          content:
+            application/json:
+              example: 
+                booking_ref: 1006
+                room_id: 7
+                customer_id: 3
+                check_in: "2024-04-10"
+                check_out: "2024-04-15"
+                payment: credit
+        '400':
+          description: Incorrect check-in/check-out dates
+        '404':
+          description: Hotel, room, or customer not found.
+        '409':
+          description: No rooms corresponding to the criteria are available
+
+  /rooms/{country}/{city}/:
+    parameters:
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    - name: country
+      in: path
+      description: The country where the hotel is located.
+      required: true
+      schema:
+        type: string
+    - name: city
+      in: path
+      description: The city where the hotel is located.
+      required: true
+      schema:
+        type: string
+    - name: room_type
+      in: query
+      required: true
+      description: Requested room type for the booking. 
+      schema:
+        type: string
+    - name: check_in
+      in: query
+      required: true
+      description: Requested check in date for the booking. (2024-06-07)
+      schema: 
+        type: string
+        format: date
+    - name: check_out
+      in: query
+      required: true
+      description: Requested check out date for the booking. (2024-06-07)
+      schema: 
+        type: string
+        format: date       
+    get:
+      description: Retrieves availability information for rooms in a specific city.
+      responses:
+        '200':
+          description: Returns a list of available rooms.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    hotel:
+                      type: string
+                      description: The name of the hotel.
+                    country:
+                      type: string
+                      description: The country where the hotel is located.
+                    city:
+                      type: string
+                      description: The city where the hotel is located.
+                    price:
+                      type: number
+                      format: float
+                      description: The price of the room.
+              example:
+                room_number: 101
+                hotel_name: Hotel1
+                type: single
+                price: 80.0
+        '400':
+          description: Bad request. Missing or invalid query parameters.          
+        '409':
+          description: No rooms fulfilling the criteria are available.
+  
+  
+  /keys/:
+    parameters:
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    post:
+      description: Creates a new API key for admins.
+      requestBody:
+        description: JSON document that contains the data of the key. 
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKey'
+            example:
+              username: admin username
+              password: admin password
+      responses: 
+        '200':
+          description: Generated API key
+          content:
+            application/json:
+              example: 
+                key: HSP07sogQOFe95NwjEkBkp2dnOHvbt0-HuxvKU5OVIs
+                admin_username: heikki
+        '415':
+          description: Wrong media type was used.
+        '400':
+          description: The request body was not valid.
+        '401':
+          description: Incorrect username or password!
+        '409':
+          description: Failure in POST. Admin already has an API key!
+    delete: 
+      description: Deletes the API key of the authenticated admin.
+      responses: 
+        '200':
+          description: API key successfully deleted.
+          
