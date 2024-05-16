@@ -44,14 +44,18 @@ The purpose of the meeting was to assess the progress of the group regarding the
 * **ASSISTANTS: Iván Sánchez Milara**
 
 ### Minutes
-*Summary of what was discussed during the meeting*
+The purpose of this meeting was to evaluate the hypermedia implementation and documentation of our API. Hypermedia was assessed based on its relation diagram and the corresponding implementation. The primary idea of a hypermedia diagram was clarified in the meeting, and a new diagram with all the connected resources will be drawn based on the feedback. The API documentation presented in the meeting was identified as somewhat outdated as it described the API prior to any hypermedia implementation. The API tests presented in this meeting considered only the status codes, not the hypermedia responses. The mandatory query parameters for getting rooms with the RoomCollection resource were considered slightly problematic. In other words, the API could be a bit broader and allow client-side filtering instead. In conclusion, both the documentation and testing need to be updated before the final meeting to correctly represent the hypermedia implementation.
 
 ### Action points
-*List here the actions points discussed with assistants*
+1. Utilize IANA terms in the namespace when applicable (e.g. *edit* instead of *modify-booking*)
+2. The hypermedia diagram needs to be updated to represent the resources and their connectedness properly
+3. In the CustomerItem resource, the hypermedia should not provide a control for adding a customer
+4. The query parameters in the RoomCollection resource should be optional, not mandatory
+5. Testing needs to be updated to consider hypermedia responses in addition to the status codes
 
 ## Final meeting
-* **DATE:**
-* **ASSISTANTS:**
+* **DATE: 17.5.2024**
+* **ASSISTANTS: Iván Sánchez Milara**
 
 ### Minutes
 *Summary of what was discussed during the meeting*
