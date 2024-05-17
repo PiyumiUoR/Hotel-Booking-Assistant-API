@@ -229,7 +229,7 @@ def edit_booking(s, base_resp, booking_ref, customer_id, hotel, room_type, payme
         
             request_body = generate_request_body_from_schema(
                 edit_ctrl["schema"],
-                customer_id=customer_id,
+                customer_id=int(customer_id),
                 hotel=hotel,
                 room_type=room_type,
                 payment=payment,
@@ -264,7 +264,7 @@ def create_booking(s, resp, customer_id, hotel, room_type, payment, check_in, ch
         
         request_body = generate_request_body_from_schema(
             booking_ctrl["schema"],
-            customer_id=customer_id,
+            customer_id=int(customer_id),
             hotel=hotel,
             room_type=room_type,
             payment=payment,
