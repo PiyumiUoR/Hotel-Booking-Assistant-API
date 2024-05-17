@@ -93,6 +93,55 @@ The [client.py](https://github.com/RafiqulT1/PWP/blob/main/api/client.py) should
 python client.py <action> <argument_value> --username <username> --api_key <api_key>
 ```
 
+## Sample test commands to test all the functions in client
+
+1. **create_customer**:
+```bash
+python client.py create_customer --username "aino" --api_key "4eBHgh-3XjSme13nlnQmJs63AHUPAYOoBkVNf5FgELQ" --name "Maija Meikalainen" --mail "maija.meikala@gmail.com" --address "Maijantie 1" --phone "NaN"
+```
+
+2. **create_booking**:
+```bash
+python client.py create_booking --username "aino" --api_key "4eBHgh-3XjSme13nlnQmJs63AHUPAYOoBkVNf5FgELQ" --customer_id 3 --hotel "Hotel3" --room_type "double" --check_in "2024-04-10" --check_out "2024-04-15" --payment "credit"
+```
+
+3. **edit_customer**:
+```bash
+python client.py edit_customer --username <username> --api_key <api_key> --customer_id <customer_id> --name "New Name" --mail "new.email@sample.com" --address "New Address" --phone "New Phone"
+```
+
+4. **edit_booking**:
+```bash
+python client.py edit_booking --username <username> --api_key <api_key> --booking_ref <booking_ref> --customer_id <customer_id> --hotel "New Hotel" --room_type "suite" --check_in "2024-05-01" --check_out "2024-05-10" --payment "cash"
+```
+
+5. **delete_customer**:
+```bash
+python client.py delete_customer --username <username> --api_key <api_key> --customer_id <customer_id>
+```
+
+6. **delete_booking**:
+```bash
+python client.py delete_booking --username <username> --api_key <api_key> --booking_ref <booking_ref>
+```
+
+7. **get_customer**:
+```bash
+python client.py get_customer --username <username> --api_key <api_key> --customer_id <customer_id>
+```
+
+8. **get_booking**:
+```bash
+python client.py get_booking --username <username> --api_key <api_key> --booking_ref <booking_ref>
+```
+
+9. **get_rooms**:
+```bash
+python client.py get_rooms --username <username> --api_key <api_key> --country "Country" --city "City" --room_type "single" --check_in "2024-05-20" --check_out "2024-05-25"
+```
+
+Make sure to replace `<username>`, `<api_key>`, `<customer_id>`, `<booking_ref>`, `"Hotel3"`, `"double"`, `"credit"`, `"2024-04-10"`, `"2024-04-15"`, `"Maija Meikalainen"`, `"maija.meikala@gmail.com"`, `"Maijantie 1"`, `"NaN"`, `"New Name"`, `"new.email@example.com"`, `"New Address"`, `"New Phone"`, `"New Hotel"`, `"suite"`, `"2024-05-01"`, `"2024-05-10"`, `"cash"`, `"Country"`, `"City"`, `"single"`, `"2024-05-20"`, and `"2024-05-25"` with the actual values you want to use for testing.
+
 ### Highlights:
 Our core application logic in app.py and utility constants in static/constants.py have achieved 100% coverage, ensuring that our foundational code is thoroughly tested.
 The comprehensive tests in test_app.py also got a perfect coverage, highlighting the effectiveness of our testing strategy.
