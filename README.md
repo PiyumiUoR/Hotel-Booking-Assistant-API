@@ -86,6 +86,13 @@ On April 9, 2024 our comprehensive API testing achieved an impressice 94% overal
 ### About Test Coverage Report:
 ![Test Coverage Report](https://github.com/RafiqulT1/PWP/blob/main/images/Coverage%20report.png)
 
+# Client
+
+The [client.py](https://github.com/RafiqulT1/PWP/blob/main/api/client.py) should be downloaded and it can be easily run with the script;
+```
+python client.py <action> <argument_value> --username <username> --api_key <api_key>
+```
+
 ### Highlights:
 Our core application logic in app.py and utility constants in static/constants.py have achieved 100% coverage, ensuring that our foundational code is thoroughly tested.
 The comprehensive tests in test_app.py also got a perfect coverage, highlighting the effectiveness of our testing strategy.
