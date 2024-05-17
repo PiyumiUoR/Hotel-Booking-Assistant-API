@@ -1,0 +1,504 @@
+---
+openapi: 3.0.3
+info: 
+  title: Hotel Booking Assistant API
+  version: 1.0.0
+  description: |
+    This API allows users to reserve hotel rooms chosing according to the country, city, check-in and check-out dates. 
+  contact: 
+    name: Julius, Rafiqul, Piyumi
+servers: 
+  - url: /api/
+components: 
+  parameters: 
+    booking:
+      description: Booking reference of the selected booking.
+      in: path
+      name: Booking reference
+      required: true
+      schema: 
+        type: integer
+    customer:
+      description: Customer ID of the selected customer.
+      in: path
+      name: Customer ID
+      required: true
+      schema:
+        type: integer
+    Hotels-Api-Key:
+      description: The known API key of the admin. 
+      in: header
+      name: Hotels-Api-Key
+      required: true
+      schema: 
+        type: string
+    Admin-User-Name:
+      description: The admin username. 
+      in: header
+      name: Admin-User-Name
+      required: true
+      schema: 
+        type: string
+  schemas: 
+    Booking: 
+      properties: 
+        customer_id: 
+          type: integer
+        hotel: 
+          type: string
+        room_type: 
+          type: string
+          enum: 
+          - single
+          - double
+          - suite
+        payment: 
+          type: string
+          enum:
+          - debit
+          - credit
+          - cash
+        check_in:
+          type: string
+          format: date
+        check_out:
+          type: string
+          format: date
+    Customer: 
+      properties:  
+        name:
+          type: string
+        phone: 
+          type: string
+        mail: 
+          type: string
+          format: email
+        address: 
+          type: string
+    ApiKey:
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+paths:
+  /customers/:
+    parameters:
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    post:
+      description: Adds a new customer to the customer database.
+      requestBody: 
+        description: JSON document with new customer data.
+        content: 
+          application/vnd.mason+json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+            example: 
+              name: Matti Meikalainen 
+              address: Matintie 1
+              phone: 0414253982
+              mail: matti.meikalainen@gmail.com
+      responses:
+        '201':
+          description: Successfully created the new customer.
+          content:
+            application/vnd.mason+json:
+              schema: 
+                $ref: '#/components/schemas/Customer'
+              example:
+                id: 3
+                name: Matti Meikalainen 
+                phone: NaN
+                mail: matti.meikalainen@gmail.com
+                address: Matintie 1
+                '@controls':
+                  bookie:customer:
+                    method: GET
+                    title: Get details of the customer
+                    href: /customers/3/
+                  self:
+                    href: /customers/3/
+                '@namespace':
+                  bookie:
+                    name: /api/link-relations/
+        '400':
+          description: The request body was not valid.           
+        '409':
+          description: Failure in POST. E-mail already in use.
+        '415':
+          description: Wrong media type was used.
+
+  /customers/{customer}/:
+    parameters: 
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    - $ref: '#/components/parameters/customer'
+    get: 
+      description: Gets the details of the customer.
+      responses:
+        '200':
+          description: Returns details of the customer. 
+          content:
+            application/vnd.mason+json:
+              schema: 
+                $ref: '#/components/schemas/Customer'
+              example:
+                id: 3
+                name: Matti Meikalainen 
+                phone: NaN
+                mail: matti.meikalainen@gmail.com
+                address: Matintie 1
+                '@controls':
+                  collection:
+                    href: /customers/
+                  edit:
+                    encoding: json
+                    href: /customers/3/
+                    method: PUT
+                    title: Update customer
+                  bookie:delete:
+                    href: /customers/3/
+                    method: DELETE
+                    title: Delete the customer
+                  bookie:rooms-av-all:
+                    href: /rooms/?country=Finland&city=Oulu&room_type=double&check_in=2024-05-10&check_out=2024-05-15
+                    isHrefTemplate: true
+                  bookie:add-booking:
+                    encoding: json
+                    href: /bookings/
+                    method: POST
+                    schema:
+                      $ref: '#/components/schemas/Booking'
+                    title: Add new booking
+                  self: 
+                    href: /customers/3/
+                '@namespace':
+                  bookie: 
+                    name: /api/link-relations/
+        '404':
+          description: The customer was not found
+    delete:
+      description: Delete the selected customer.
+      responses: 
+        '204':
+          description: The customer was successfully deleted    
+        '405':
+          description: DELETE not permitted (Customer has bookings)
+    put:
+      description: Modifies an existing customer. 
+      requestBody: 
+        description: JSON document with modified customer data.
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+            example:
+              name: Matti Meikalainen 
+              phone: NaN
+              mail: matti.meikalainen@gmail.com
+              address: Matintie 1
+      responses: 
+        '204':
+          description: The customer's attributes were updated successfully.
+        '400':
+          description: The request body was not valid.
+        '409':
+          description: Failure in PUT. E-mail already in use
+        '415':
+          description: Unsupported media type
+
+  /bookings/:
+    parameters:
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    post:
+      description: Adds a new booking.
+      requestBody:
+        description: JSON document with new booking data. 
+        content: 
+          application/vnd.mason+json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+            example:
+              customer_id: 3
+              hotel: Hotel3
+              room_type: suite
+              check_in: "2024-03-01"
+              check_out: "2024-03-04"
+              payment: credit
+      responses:
+        '201':
+          description: Successfully creation of the new booking.
+          content:
+            application/vnd.mason+json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+              example: 
+                '@controls':
+                  bookie:booking:
+                    method: GET
+                    title: Get details of the booking
+                    href: /bookings/1006/
+                  self:
+                    href: /bookings/1006/
+                '@namespace':
+                  bookie:
+                    name: /api/link-relations#
+                booking_ref: 1006
+                room_id: 7
+                customer_id: 3
+                check_in: "2024-04-10"
+                check_out: "2024-04-15"
+                payment: credit
+        '400':
+          description: Incorrect check-in/check-out dates.
+        '409':
+          description: Failure in POST. No room of the requested type is available.
+        '415':
+          description: Wrong media type was used.
+        '404': 
+          description: The hotel was not found. 
+
+  /bookings/{booking}/:
+    parameters: 
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    - $ref: '#/components/parameters/booking'
+    get:
+      description: Get the booking information of a single booking
+      responses: 
+        '200':
+          description: Returns the details of the requested booking successfully. 
+          content:
+            application/vnd.mason+json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+              example:
+                '@controls':
+                  collection:
+                    href: /bookings/
+                  edit:
+                    encoding: json
+                    href: /bookings/1005/
+                    method: PUT
+                    title: Edit the booking
+                  bookie:delete:
+                    href: /bookings/1005/
+                    method: DELETE
+                    title: Delete booking
+                  bookie:rooms-av-all:
+                    href: /rooms/?country=Finland&city=Oulu&room_type=double&check_in=2024-05-10&check_out=2024-05-15
+                  bookie:customer:
+                    href: /customer/3/
+                  self:
+                    href: /bookings/1005/
+                '@namespace':
+                  bookie:
+                    name: /api/link-relations/
+                booking_ref: 1005
+                room_type: double
+                room_number: 301
+                hotel: Hotel3
+                customer_id: 3
+                customer_name: Mikko Mikkonen
+                check-in: 2024-02-20
+                check-out: 2024-02-24
+                payment: credit
+                
+        '404':
+          description: The booking was not found.
+    delete:
+      description: Deletes the selected booking.
+      responses:
+        '204':
+          description: The booking is successfully deleted. 
+          content:
+          '@controls':
+            collection:
+              href: /bookings/
+            bookie:add-booking:
+              encoding: json
+              href: /bookings/
+              method: POST
+              schema:
+                $ref: '#/components/schemas/Booking'
+              title: Add new booking
+            self:
+              href: /customers/1/
+            bookie:rooms-av-all:
+              href: /rooms/
+          '@namespace':
+            bookie:
+              name: /api/link-relations#
+          '@controls':
+            collection:
+              href: /bookings/
+            edit:
+              encoding: json
+              href: /bookings/1006/
+              method: PUT
+              title: Edit the booking
+            bookie:delete:
+              href: /bookings/1006/
+              method: DELETE
+              title: Delete booking
+            bookie:rooms-av-all:
+              href: /rooms/
+            bookie:customer:
+              href: /customer/2/
+            self:
+              href: /bookings/1006/
+          '@namespace':
+            bookie:
+              name: /api/link-relations#
+        '404':
+          description: Not found. The requested booking does not exist.
+    put:
+      description: Modifies the details of the specified booking.
+      requestBody:
+        description: JSON document with modified booking data. 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+            example:
+              customer_id: 3
+              hotel: Hotel3
+              room_type: suite
+              check_in: "2024-03-01"
+              check_out: "2024-04-04"
+              payment: credit
+      responses:
+        '204':
+          description: Successfully modified the booking.
+        '400':
+          description: Incorrect check-in/check-out dates
+        '404':
+          description: Hotel, room, or customer not found.
+        '409':
+          description: No rooms corresponding to the criteria are available
+
+  /rooms/:
+    parameters:
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    - name: country
+      in: query
+      description: The country where the hotel is located.
+      schema:
+        type: string
+    - name: city
+      in: query
+      description: The city where the hotel is located.
+      schema:
+        type: string
+    - name: room_type
+      in: query
+      description: Requested room type for the booking. 
+      schema:
+        type: string
+    - name: check_in
+      in: query
+      description: Requested check in date for the booking. (2024-06-07)
+      schema: 
+        type: string
+        format: date
+    - name: check_out
+      in: query
+      description: Requested check out date for the booking. (2024-06-07)
+      schema: 
+        type: string
+        format: date       
+    get:
+      description: Retrieves availability information for rooms in a specific city.
+      responses:
+        '200':
+          description: Returns a list of available rooms.
+          content:
+            application/vnd.mason+json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    hotel:
+                      type: string
+                      description: The name of the hotel.
+                    country:
+                      type: string
+                      description: The country where the hotel is located.
+                    city:
+                      type: string
+                      description: The city where the hotel is located.
+                    price:
+                      type: number
+                      format: float
+                      description: The price of the room.
+              example:
+                '@controls':
+                  bookie:add-booking:
+                    encoding: json
+                    href: /bookings/
+                    method: POST
+                    schema:
+                      $ref: '#/components/schemas/Booking'
+                    title: Add new booking
+                  bookie:add-customer:
+                    encoding: json
+                    href: /customers/
+                    method: POST
+                    schema:
+                      $ref: '#/components/schemas/Customer'
+                room_number: 101
+                hotel_name: Hotel1
+                type: single
+                price: 80.0
+        '400':
+          description: Bad request. Missing or invalid query parameters.          
+        '409':
+          description: No rooms fulfilling the criteria are available.
+  
+  
+  /keys/:
+    parameters:
+    - $ref: '#/components/parameters/Hotels-Api-Key'
+    - $ref: '#/components/parameters/Admin-User-Name'
+    post:
+      description: Creates a new API key for admins.
+      requestBody:
+        description: JSON document that contains the data of the key. 
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKey'
+            example:
+              username: admin username
+              password: admin password
+      responses: 
+        '201':
+          description: Generated API key successfully.
+          headers: 
+            Hotels-Api-Key: 
+              schema: 
+                type: integer
+        '415':
+          description: Wrong media type was used.
+        '400':
+          description: The request body was not valid.
+        '401':
+          description: Incorrect username or password!
+        '409':
+          description: Failure in POST. Admin already has an API key!
+    delete: 
+      description: Deletes the API key of the authenticated admin.
+      responses: 
+        '204':
+          description: API key successfully deleted.
+        '403':
+          description: Admin is unauthorized.
+          
